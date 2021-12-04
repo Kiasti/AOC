@@ -43,13 +43,12 @@ void runDay2()
 void runDay3()
 {
     std::cout << "Do you want Power consumption or LifeSupportRating? 0 or 1? jk Day 2 wasnt fixed up yet." << std::endl;
-    //bool option = false;
-    //std::cin >> option;
+    bool option = false;
+    std::cin >> option;
 
     if (day3::diagnostics dm; dm.loadDiagnosticReport("aoc3.txt"))
     {
-        //const long value = option ? dm.getLifeSupportRating() : dm.getPowerConsumption();
-		const long value = dm.getLifeSupportRating();
+        const long value = option ? dm.getLifeSupportRating() : dm.getPowerConsumption();
         std::cout << "The value: " << value << std::endl;
     }
     else

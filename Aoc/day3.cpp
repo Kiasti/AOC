@@ -2,6 +2,34 @@
 #include <fstream>
 #include <iostream>
 
+
+long day3::diagnostics::getPowerConsumption() const
+{
+    if (data.empty())
+        return 0;
+
+    long gamma = 0;
+    long epsilon = 0;
+    int i = 11;
+    do
+    {
+        unsigned long zero = 0;
+        unsigned long one = 0;
+        for (const auto v : data)
+        {
+            if ((v & (1 << i)) >> i)
+                ++one;
+            else
+                ++zero;
+        }
+        gamma |= zero > one ? 0 << i : 1 << i;
+        epsilon |= zero > one ? 1 << i : 0 << i;
+        --i;
+    } while (i > -1);
+    return gamma * epsilon;
+}
+
+
 long day3::diagnostics::getLifeSupportRating() const
 {
     if (data.empty())
@@ -36,7 +64,7 @@ long day3::diagnostics::getLifeSupportRating() const
         {
             for (auto& v : co2List)
             {
-                if ((v >> i) & i)
+                if ((v & (1 << i)) >> i)
                     tempList1.emplace_back(v);
                 else
                     tempList2.emplace_back(v);

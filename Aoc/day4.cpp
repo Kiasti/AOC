@@ -3,7 +3,7 @@
 #include <fstream>
 #include <iostream>
 
-bool day4::bingoCard::isWin()
+bool day4::bingoCard::isWinningCard()
 {
     if (hasWon)
         return false;
@@ -11,20 +11,17 @@ bool day4::bingoCard::isWin()
     for (int i = 0; i < 5; ++i)
     {
         if (arr2[i][0] && arr2[i][1] && arr2[i][2] && arr2[i][3] && arr2[i][4])
-        {
             hasWon = true;
-            return true;
-        }
     }
+    if (hasWon)
+        return true;
+
     for (int j = 0; j < 5; ++j)
     {
         if (arr2[0][j] && arr2[1][j] && arr2[2][j] && arr2[3][j] && arr2[4][j])
-        {
             hasWon = true;
-            return true;
-        }
     }
-    return false;
+    return hasWon;
 }
 
 int day4::bingoCard::sumAllUnmarked()
@@ -82,20 +79,17 @@ bool day4::kickSquidButt::loadCardsAndCalls(std::string&& fileName)
 void day4::kickSquidButt::playGame()
 {
     bool gameWon = false;
+    auto multiply = 0;
     for (const auto num : numbersToCall)
     {
         for (auto iter = data.begin(); iter != data.end(); ++iter)
         {
-            if (iter->hasWon)
-                continue;
-
             iter->setNumber(num);
-            if (iter->isWin())
+            if (iter->isWinningCard())
             {
                 gameWon = true;
-                const auto multiply = iter->sumAllUnmarked() * num;
+                multiply = iter->sumAllUnmarked() * num;
 
-                std::cout << "The winning number: " << multiply << std::endl;
                 if (gameWon && !letSquidWin)
                     break;
             }
@@ -103,6 +97,5 @@ void day4::kickSquidButt::playGame()
         if (gameWon && !letSquidWin)
             break;
     }
-    if (letSquidWin)
-        std::cout << "Last one will let the squid win!" << std::endl;
+    std::cout << "The winning number: " << multiply << std::endl;
 }

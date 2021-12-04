@@ -12,7 +12,8 @@ namespace day3
 		public:
             [[nodiscard]] bool isPart2() const { return part2; }
             void setPart2(const bool b) { part2 = b; }
-		
+
+			[[nodiscard]] long getPowerConsumption() const;
             [[nodiscard]] long getLifeSupportRating() const;
             bool loadDiagnosticReport(std::string&& fileName);
 		

@@ -10,7 +10,7 @@ namespace day4
         bool arr2[5][5]{ {false, false, false, false, false}, {false, false, false, false, false}, {false, false, false, false, false}, {false, false, false, false, false}, {false, false, false, false, false} };
         bool hasWon = false;
 
-        bool isWin();
+        bool isWinningCard();
         int sumAllUnmarked();
         void setNumber(int num);
     };
